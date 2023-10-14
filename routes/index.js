@@ -44,22 +44,37 @@ const { update_user , getFine } = require("../controller/user");
 router.put( '/updateuser' , auth , update_user );
 router.get( '/getfine' , auth , getFine);
 
+// *****************************************************************************************************************
+
+//                                           QR  Routes 
+
+//*******************************************************************************************************************
 
 
+const{ generates , scan} = require("../controller/qrCode");
+
+router.post("/generateqr", auth , generates);
+router.post("/scanqr" , scan);
 
 
+// *****************************************************************************************************************
 
+//                                           Book Routes 
 
+//*******************************************************************************************************************
 
+const{ getAllBooks , getIssuedBooks , issueBooksToUser , getBookByName ,
+    reIssue, returnBook , EmptyBooks , requestbook , getBookFromCategory } = require("../controller/book");
 
-
-
-
-
-
-
-
-
+router.get( '/getallbooks' ,getAllBooks );
+router.get( '/getissuedbooks' , auth ,getIssuedBooks );
+router.post( '/issuebook' , issueBooksToUser );
+router.post( '/getbookbyname' ,getBookByName );
+router.put( '/reissue' , auth , reIssue );
+router.get( '/returnBook' , returnBook );
+router.get('/getunavailablebooks' , EmptyBooks );
+router.post('/requestbook' , requestbook );
+router.post('/getbookfromcategory' , getBookFromCategory );
 
 
 
